@@ -191,6 +191,8 @@
 		<Unit filename="Config.h">
 			<Option virtualFolder="Utils/" />
 		</Unit>
+		<Unit filename="Events.cpp" />
+		<Unit filename="Events.h" />
 		<Unit filename="Exceptions.h">
 			<Option virtualFolder="Utils/" />
 		</Unit>
