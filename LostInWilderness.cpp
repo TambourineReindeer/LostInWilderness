@@ -74,13 +74,15 @@ typedef struct ChunkUpdateStruct {
 	int		seed;
 } ChunkUpdateType;
 
-// Functions in Events class
+// Functions imported from Events class
 void update_vectors();
 void resize( GLFWwindow* wnd, int w, int h );
 void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods );
 void idle();
 void motion(GLFWwindow *wnd, double x, double y);
 void mouse();
+
+void setDefaults(Shader *shader);
 
 static Camera		g_camera;
 static World		*world;
@@ -92,6 +94,12 @@ struct stat		    info;
 
 uint32_t chunk_update_count = 0;
 uint32_t chunk_gen_count = 0;
+
+
+// Shorthand: Size of one chunk in blocks
+#define CX CHUNK_WIDTH
+#define CY CHUNK_HEIGHT
+#define CZ CHUNK_LENGTH
 
 
 bool							g_finished;
@@ -161,11 +169,7 @@ int init_resources()
 
 	// -- Default the uniforms/attribs
 	Shader *shader_world = ResourceManager::iResourceManager->getShader("default");
-	shader_world->setUniform1i( "texture", 0 );
-	shader_world->setUniform4f( "g_SunLightSource.position", (float*)glm::value_ptr( glm::vec4( 0, -1, 0, 0 ) ) );
-	shader_world->setUniform4f( "g_SunLightSource.diffuse", (float*)glm::value_ptr( glm::vec4( 1, 1, 1, 1 ) ) );
-	shader_world->setUniform4f( "g_SunLightSource.ambient", (float*)glm::value_ptr( glm::vec4( 0.4, 0.4, 0.4, 1 ) ) );
-	shader_world->setUniform1f( "g_SunLightSource.specular", 1.0f );
+	setDefaults(shader_world);
 
 	// -- Create the world
 	glClearColor(0.0f,0.0f,0.0f, 1.0f);
