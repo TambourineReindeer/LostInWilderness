@@ -47,7 +47,7 @@ static void update_vectors()
 	g_camera.up = glm::cross(g_camera.right, g_camera.lookat);
 }
 
-void resize( GLFWwindow* wnd, int w, int h)
+void resize( GLFWwindow* wnd, int w, int h )
 {
 	ww = w;
 	wh = h;
