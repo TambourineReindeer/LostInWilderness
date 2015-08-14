@@ -74,6 +74,7 @@ typedef struct ChunkUpdateStruct {
 	int		seed;
 } ChunkUpdateType;
 
+// Functions in Events class
 void update_vectors();
 void resize( GLFWwindow* wnd, int w, int h );
 void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods );
@@ -91,12 +92,6 @@ struct stat		    info;
 
 uint32_t chunk_update_count = 0;
 uint32_t chunk_gen_count = 0;
-
-
-// Shorthand: Size of one chunk in blocks
-#define CX CHUNK_WIDTH
-#define CY CHUNK_HEIGHT
-#define CZ CHUNK_LENGTH
 
 
 bool							g_finished;
