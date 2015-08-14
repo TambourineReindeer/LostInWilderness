@@ -74,12 +74,12 @@ typedef struct ChunkUpdateStruct {
 	int		seed;
 } ChunkUpdateType;
 
-static void update_vectors();
+void update_vectors();
 void resize( GLFWwindow* wnd, int w, int h );
 void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods );
-static void idle();
+void idle();
 void motion(GLFWwindow *wnd, double x, double y);
-static void mouse();
+void mouse();
 
 static Camera		g_camera;
 static World		*world;

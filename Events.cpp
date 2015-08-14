@@ -30,7 +30,7 @@ Events::~Events()
 }
 
 // Calculate the forward, right and lookat vectors from the angle vector
-static void update_vectors()
+void update_vectors()
 {
 	g_camera.forward.x = std::sin(g_camera.angle.x);
 	g_camera.forward.y = 0;
@@ -131,7 +131,7 @@ void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods )
 	}
 }
 
-static void idle()
+void idle()
 {
 	static double pt = 0.0;
 	static const float movespeed = 10;
@@ -190,7 +190,7 @@ void motion(GLFWwindow *wnd, double x, double y)
 	}
 }
 
-static void mouse(int button, int state, int x, int y)
+void mouse(int button, int state, int x, int y)
 {
 	if(state != GLFW_PRESS)
 		return;
