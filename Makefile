@@ -267,6 +267,3 @@ show:
 	@echo 'COMPILE.cxx :' $(COMPILE.cxx)
 	@echo 'link.c      :' $(LINK.c)
 	@echo 'link.cxx    :' $(LINK.cxx)
-
-## End of the Makefile ##  Suggestions are welcome  ## All rights reserved ##
-#############################################################################

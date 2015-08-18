@@ -466,12 +466,12 @@ void LostInWilderness::addChunkToSaveQueue( Chunk *chunk )
 int LostInWilderness::run()
 {
 	// -- File system manipulation goes here
-	FileSystem::Directory::create("./world");
+	FileSystem::Directory::create("../world");
 
 #if defined(_MSC_VER)
 
 	WIN32_FIND_DATA fd;
-	HANDLE hfile = FindFirstFile(".\\world\\*", &fd);
+	HANDLE hfile = FindFirstFile("..\\world\\*", &fd);
 
 	if (hfile != INVALID_HANDLE_VALUE)
 	{
@@ -493,7 +493,7 @@ int LostInWilderness::run()
 	{
 
 		// -- NOTE: This is temporary
-		DIR *d = opendir("./world");
+		DIR *d = opendir("../world");
 		struct dirent *dp;
 
 		while ((dp = readdir(d)) != nullptr)
