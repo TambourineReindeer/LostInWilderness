@@ -30,7 +30,7 @@ Events::~Events()
 }
 
 // Calculate the forward, right and lookat vectors from the angle vector
-void update_vectors()
+void Events::update_vectors()
 {
 	g_camera.forward.x = std::sin(g_camera.angle.x);
 	g_camera.forward.y = 0;
@@ -47,14 +47,14 @@ void update_vectors()
 	g_camera.up = glm::cross(g_camera.right, g_camera.lookat);
 }
 
-void resize( GLFWwindow* wnd, int w, int h )
+void Events::resize( GLFWwindow* wnd, int w, int h )
 {
 	ww = w;
 	wh = h;
 	glViewport(0, 0, w, h);
 }
 
-void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods )
+void Events::key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods )
 {
 	if ( action == GLFW_RELEASE )
 	switch(key) {
@@ -131,7 +131,7 @@ void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods )
 	}
 }
 
-void idle()
+void Events::idle()
 {
 	static double pt = 0.0;
 	static const float movespeed = 10;
@@ -154,7 +154,7 @@ void idle()
 		g_camera.position.y -= movespeed * dt;
 }
 
-void motion(GLFWwindow *wnd, double x, double y)
+void Events::motion(GLFWwindow *wnd, double x, double y)
 {
 	static bool warp = false;
 	static const float mousespeed = 0.001f;
@@ -190,7 +190,7 @@ void motion(GLFWwindow *wnd, double x, double y)
 	}
 }
 
-void mouse(int button, int state, int x, int y)
+void Events::mouse(int button, int state, int x, int y)
 {
 	if(state != GLFW_PRESS)
 		return;

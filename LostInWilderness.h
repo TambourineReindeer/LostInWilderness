@@ -21,6 +21,7 @@
 class Chunk;
 class Config;
 class World;
+class Events;
 
 
 /** @class LostInWilderness

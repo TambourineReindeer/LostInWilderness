@@ -10,7 +10,6 @@
 #include "World.h"
 #include "WorldGenerator.h"
 #include "FileSystem.h"
-#include "Events.h"
 
 #if defined(_MSC_VER)
 #include <direct.h>
@@ -54,6 +53,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/noise.hpp>
 
+#include "Events.h"
 
 typedef struct ChunkUpdateStruct {
 	enum EType
@@ -73,16 +73,6 @@ typedef struct ChunkUpdateStruct {
 			z;
 	int		seed;
 } ChunkUpdateType;
-
-// Functions imported from Events class
-void update_vectors();
-void resize( GLFWwindow* wnd, int w, int h );
-void key_cb( GLFWwindow* wnd, int key, int scancode, int action, int mods );
-void idle();
-void motion(GLFWwindow *wnd, double x, double y);
-void mouse();
-
-void setDefaults(Shader *shader);
 
 static Camera		g_camera;
 static World		*world;
@@ -169,7 +159,11 @@ int init_resources()
 
 	// -- Default the uniforms/attribs
 	Shader *shader_world = ResourceManager::iResourceManager->getShader("default");
-	setDefaults(shader_world);
+	shader_world->setUniform1i( "texture", 0 );
+	shader_world->setUniform4f( "g_SunLightSource.position", (float*)glm::value_ptr( glm::vec4( 0, -1, 0, 0 ) ) );
+	shader_world->setUniform4f( "g_SunLightSource.diffuse", (float*)glm::value_ptr( glm::vec4( 1, 1, 1, 1 ) ) );
+	shader_world->setUniform4f( "g_SunLightSource.ambient", (float*)glm::value_ptr( glm::vec4( 0.4, 0.4, 0.4, 1 ) ) );
+	shader_world->setUniform1f( "g_SunLightSource.specular", 1.0f );
 
 	// -- Create the world
 	glClearColor(0.0f,0.0f,0.0f, 1.0f);
@@ -204,7 +198,7 @@ int init_resources()
     // ResourceManager::iResourceManager->getWorldGen("default").getTerrainHeight(0,0,0)
 	g_camera.position = glm::vec3(0, CY / 2, 0);
 	g_camera.angle = glm::vec3(0, -0.5, 0);
-	update_vectors();
+	Events::update_vectors();
 
 	return 1;
 }
@@ -518,13 +512,13 @@ int LostInWilderness::run()
 		GLFWwindow *window = (GLFWwindow*)Renderer::getWindow( "g_window" );
 		glfwGetWindowSize( window, &ww, &wh );
 		glfwSetCursorPos( window, ww / 2, wh / 2);
-		glfwSetWindowSizeCallback( window, resize );
-		glfwSetKeyCallback( window, key_cb );
-		glfwSetCursorPosCallback( window, motion );
+		glfwSetWindowSizeCallback( window, Events::resize );
+		glfwSetKeyCallback( window, Events::key_cb );
+		glfwSetCursorPosCallback( window, Events::motion );
 
 		while ( !glfwWindowShouldClose( window ) )
 		{
-			idle();
+			Events::idle();
 			display();
 		}
 

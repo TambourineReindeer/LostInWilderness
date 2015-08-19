@@ -207,15 +207,6 @@ void Shader::setAttrib4f( std::string name, float value[4] )
 	glVertexAttrib4fv( this->attribs.find( name )->second, value );
 }
 
-void setDefaults(Shader *shader)
-{
-	shader->setUniform1i( "texture", 0 );
-	shader->setUniform4f( "g_SunLightSource.position", (float*)glm::value_ptr( glm::vec4( 0, -1, 0, 0 ) ) );
-	shader->setUniform4f( "g_SunLightSource.diffuse", (float*)glm::value_ptr( glm::vec4( 1, 1, 1, 1 ) ) );
-	shader->setUniform4f( "g_SunLightSource.ambient", (float*)glm::value_ptr( glm::vec4( 0.4, 0.4, 0.4, 1 ) ) );
-	shader->setUniform1f( "g_SunLightSource.specular", 1.0f );
-}
-
 #if defined( _SHADER_UTILS_H__ )
 #include <stdio.h>
 #include <stdlib.h>
