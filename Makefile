@@ -45,28 +45,28 @@ ifeq ($(OS),Windows_NT)
     LIBS       += -lglew32s -lopengl32 -lgdi32 -luser32 -lkernel32 -lws2_32
     ifeq ($(or $(PROCESSOR_ARCHITECTURE),$(PROCESSOR_ARCHITEW6432)),AMD64)
         CFLAGS += -D_AMD64
-	PROGRAMD = bin/x64/liw-dbg
-	PROGRAMR = bin/x64/liw
+	PROGRAMD = bin/x64/liw-dbg-x64
+	PROGRAMR = bin/x64/liw-x64
     endif
     ifeq ($(or $(PROCESSOR_ARCHITECTURE),$(PROCESSOR_ARCHITEW6432)),$(or IA64,EM64T))
         CFLAGS += -D_IA64
-	PROGRAMD = bin/x64/liw-dbg
-	PROGRAMR = bin/x64/liw
+	PROGRAMD = bin/x64/liw-dbg-x64
+	PROGRAMR = bin/x64/liw-x64
     endif
     ifeq ($(PROCESSOR_ARCHITECTURE),x86)
         CFLAGS += -D_IA32
-	PROGRAMD = bin/x86/liw-dbg
-	PROGRAMR = bin/x86/liw
+	PROGRAMD = bin/x86/liw-dbg-x86
+	PROGRAMR = bin/x86/liw-x86
     endif
     ifneq ($(filter arm%,$(UNAME_P)),)
         CFLAGS += -D_ARM
-	PROGRAMD = bin/arm/liw-dbg
-	PROGRAMR = bin/arm/liw
+	PROGRAMD = bin/arm/liw-dbg-arm
+	PROGRAMR = bin/arm/liw-arm
     endif
     ifeq ($(UNAME_P),aarch64)
         CFLAGS += -D_AARCH64
-	PROGRAMD = bin/arm64/liw-dbg
-	PROGRAMR = bin/arm64/liw
+	PROGRAMD = bin/arm64/liw-dbg-arm64
+	PROGRAMR = bin/arm64/liw-arm64
     endif
 else
     UNAME_S := $(shell uname -s)
@@ -92,33 +92,33 @@ else
     UNAME_P := $(shell uname -p)
     ifeq ($(UNAME_P),x86_64)
         CFLAGS += -D_AMD64
-	PROGRAMD = bin/x64/liw-dbg
-	PROGRAMR = bin/x64/liw
+	PROGRAMD = bin/x64/liw-dbg-x64
+	PROGRAMR = bin/x64/liw-x64
     endif
     ifneq ($(filter %86,$(UNAME_P)),)
         CFLAGS += -D_IA32
-	PROGRAMD = bin/x86/liw-dbg
-	PROGRAMR = bin/x86/liw
+	PROGRAMD = bin/x86/liw-dbg-x86
+	PROGRAMR = bin/x86/liw-x86
     endif
     ifneq ($(filter arm%,$(UNAME_P)),)
         CFLAGS += -D_ARM
-	PROGRAMD = bin/arm/liw-dbg
-	PROGRAMR = bin/arm/liw
+	PROGRAMD = bin/arm/liw-dbg-arm
+	PROGRAMR = bin/arm/liw-arm
     endif
     ifeq ($(UNAME_P),aarch64)
         CFLAGS += -D_AARCH64
-	PROGRAMD = bin/arm64/liw-dbg
-	PROGRAMR = bin/arm64/liw
+	PROGRAMD = bin/arm64/liw-dbg-arm64
+	PROGRAMR = bin/arm64/liw-arm64
     endif
     ifneq ($(filter sparc%,$(UNAME_P)),)
 	ifeq ($(UNAME_P),sparc64)
 	    CFLAGS += -D_SPARC64
-	    PROGRAMD = bin/sparc64/liw-dbg
-	    PROGRAMR = bin/sparc64/liw
+	    PROGRAMD = bin/sparc64/liw-dbg-sparc64
+	    PROGRAMR = bin/sparc64/liw-sparc64
 	else
             CFLAGS += -D_SPARC
-	    PROGRAMD = bin/sparc/liw-dbg
-	    PROGRAMR = bin/sparc/liw
+	    PROGRAMD = bin/sparc/liw-dbg-sparc
+	    PROGRAMR = bin/sparc/liw-sparc
 	endif
     endif
 endif
